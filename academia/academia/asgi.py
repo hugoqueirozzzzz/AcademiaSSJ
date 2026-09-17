@@ -8,9 +8,9 @@ https://docs.djangoproject.com/en/6.1/howto/deployment/asgi/
 """
 
 import os
-
+from dj_static import Cling, MediaCling
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'academia.settings')
 
-application = get_asgi_application()
+application = Cling((get_asgi_application()))
