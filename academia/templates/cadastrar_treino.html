@@ -1,0 +1,42 @@
+{% extends "menu.html" %}
+{% load static %}
+
+{% block titulo %}Cadastrar Treino{% endblock %}
+
+
+{% block body %}
+
+
+<div class="container">
+    <br>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonAluno">Aluno</span>
+            <input type="text" class="form-control" name="Aluno" placeholder="Digite o nome do aluno" aria-label="Aluno" aria-describedby="basic-addonAluno">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonIdade">Idade</span>
+            <input type="text" class="form-control" name="Idade" placeholder="Digite a idade" aria-label="Idade" aria-describedby="basic-addonIdade">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonTreino">IMC</span>
+            <input type="text" class="form-control" name="Treino" placeholder="Digite o IMC" aria-label="IMC" aria-describedby="basic-addonTreino">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonTreino">Treino</span>
+            <input type="text" class="form-control" name="Treino" placeholder="Digite a ficha do treino" aria-label="Treino" aria-describedby="basic-addonTreino">
+        </div>
+        
+        
+    
+        <div class="input-group mb-3">
+            <button type="button" class="btn btn-primary">Salvar</button>
+        </div>
+</div>
+
+    </form>
+</div>
+
+
+
+{% endblock %}

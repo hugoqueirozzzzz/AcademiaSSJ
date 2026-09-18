@@ -12,6 +12,9 @@ class Aluno (models.Model):
     email = models.CharField(max_length=20)
     nascimento = models.DateField()
     pagamento = models.TextChoices('Pagamento', ['DINHEIRO', 'CARTAO', 'PIX']) 
+    frequencia = models.IntegerField(max_length=3)
+    status = models.BooleanField(default=True)
+
     
 class Treino (models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)

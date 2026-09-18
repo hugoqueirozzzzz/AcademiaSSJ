@@ -1,0 +1,79 @@
+{% extends "menu.html" %}
+{% load static %}
+
+{% block titulo %}Cadastrar TREINO{% endblock %}
+
+
+{% block body %}
+
+
+
+<div class="container-fluid">
+<br>
+<label for="exampleDataList" class="form-label">Pesquisar Aluno</label>
+<input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Escreva o nome do aluno para filtrar dados...">
+
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Plano</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Endereço</th>
+            <th scope="col">Nascimento</th>
+            <th scope="col">Pagamento</th>
+            <th scope="col">Frequência</th>
+            <th scope="col">Status</th>
+            <th scope="col">Editar</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Hugo Queiroz</td>
+            <td>062.123.572-73</td>
+            <td>Plano Básico</td>
+            <td>(91) 91234-5679</td>
+            <td>hugo@gmail.com</td>
+            <td>Rua das Flores, 123</td>
+            <td>20/10/1994</td>
+            <td>Pix</td>
+            <td>80%</td>
+            <td><div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="checkChecked" checked>
+  <label class="form-check-label" for="checkChecked">
+    Ativo
+  </label>
+</div></td> 
+            <td><a href="#" class="btn btn-primary">Editar</a></td>             
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Raissa Moraes</td>
+            <td>123.456.789-00</td>
+            <td>Plano Premium</td>
+            <td>(91) 98765-4321</td>
+            <td>nraissa@gmail.com</td>
+            <td>Rua Principal, 456</td>
+            <td>27/12/1993</td>
+            <td>Cartão de Crédito</td>
+            <td>90%</td>
+            <td><div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="checkChecked2" checked>
+  <label class="form-check-label" for="checkChecked2">
+    Ativo
+  </label>
+</div></td>
+            <td><a href="#" class="btn btn-primary">Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
