@@ -17,4 +17,17 @@ def cadastrar_treino(request):
 def listar_treinos(request):
     return render(request, 'listar_treinos.html')
 
+def hipertrofia (request):
+    return render(request, 'hipertrofia.html')
 
+def emagrecimento (request):
+    return render(request, 'emagrecimento.html')
+
+def condicionamento (request):
+    return render(request, 'condicionamento.html')
+
+def forca (request):
+    return render(request, 'forca.html')
+
+def cardio (request):
+    return render(request, 'cardio.html')

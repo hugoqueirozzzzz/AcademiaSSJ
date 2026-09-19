@@ -12,12 +12,19 @@ class Aluno (models.Model):
     email = models.CharField(max_length=20)
     nascimento = models.DateField()
     pagamento = models.TextChoices('Pagamento', ['DINHEIRO', 'CARTAO', 'PIX']) 
-    frequencia = models.IntegerField(max_length=3)
+    frequencia = models.CharField(max_length=3)
     status = models.BooleanField(default=True)
 
-    
+class Ficha (models.Model):
+    exercicios = models.CharField(max_length=100)
+    series = models.IntegerField()
+    repeticoes = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=100)
+
+
 class Treino (models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    idade = models.IntegerField(max_length=3)
-    imc = models.IntegerField(max_length=3)
-    ficha_de_treino = models.CharField(max_length=100)
+    idade = models.IntegerField()
+    imc = models.IntegerField()
+    ficha_de_treino = models.ForeignKey(Ficha, on_delete=models.CASCADE)
+
