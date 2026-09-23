@@ -43,7 +43,8 @@
             <td>{{aluno.endereco}}</td>
             <td>{{aluno.nascimento}}</td>
             <td>{{aluno.forma_pagamento}}</td>
-            <td><a href="{% url 'academia_modulo:aluno_edit' aluno.id %}" class="btn btn-primary">Editar</a> <a href="{% url 'academia_modulo:aluno_delete' aluno.id %}" class="btn btn-danger">Excluir</a></td>             
+            <td><a href="{% url 'academia_modulo:aluno_edit' aluno.id %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'academia_modulo:aluno_delete' aluno.id %}" onclick="return confirm('Tem certeza que deseja excluir este aluno?')" class="btn btn-danger">Excluir</a></td>             
         </tr>
         </tbody>
         {% endfor %}
