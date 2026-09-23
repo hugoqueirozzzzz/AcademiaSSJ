@@ -11,20 +11,27 @@ class Aluno (models.Model):
     endereco = models.CharField(max_length=100)
     email = models.CharField(max_length=20)
     nascimento = models.DateField()
-    pagamento = models.TextChoices('Pagamento', ['DINHEIRO', 'CARTAO', 'PIX']) 
-    frequencia = models.CharField(max_length=3)
-    status = models.BooleanField(default=True)
+    forma_pagamento = models.CharField(max_length=100, default='')
+   
+
+    def __str__(self):
+        return self.nome + ' - ' + self.cpf
+
 
 class Ficha (models.Model):
-    exercicios = models.CharField(max_length=100)
-    series = models.IntegerField()
-    repeticoes = models.CharField(max_length=10)
     tipo = models.CharField(max_length=100)
+  
+    def __str__(self):
+        return self.tipo
 
 
 class Treino (models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     idade = models.IntegerField()
-    imc = models.IntegerField()
+    altura = models.IntegerField()
+    peso = models.FloatField()
+    imc = models.FloatField()
     ficha_de_treino = models.ForeignKey(Ficha, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.aluno.nome + ' - ' + self.ficha_de_treino.tipo
