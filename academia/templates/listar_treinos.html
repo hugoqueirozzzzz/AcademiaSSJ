@@ -10,37 +10,43 @@
 
 <div class="container-fluid">
     <br>
-    <table class="table">
+    <table class="table" , style="text-align: center;">
         <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Aluno</th>
-            <th scope="col">Idade</th>
-            <th scope="col">ALTURA</th>
-            <th scope="col">PESO</th>
-            <th scope="col">IMC</th>
-            <th scope="col">FICHA DE TREINO</th>
-            <th scope="col">AÇÕES</th>
-        </tr>
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Aluno</th>
+                <th scope="col">Idade</th>
+                <th scope="col">ALTURA</th>
+                <th scope="col">PESO</th>
+                <th scope="col">IMC</th>
+                <th scope="col">FICHA DE TREINO</th>
+                <th scope="col">AÇÕES</th>
+            </tr>
         </thead>
+
         <tbody>
-        {% for treino in treinos %}
-        <tr>
-            <th scope="row">{{treino.id}}</th>
-            <td>{{treino.aluno.nome}}</td>
-            <td>{{treino.idade}}</td>
-            <td>{{treino.altura}}</td>
-            <td>{{treino.peso}}</td>
-            <td>{{treino.imc}}</td>
-            <td>{{treino.ficha_de_treino.tipo}}</td>
-            <td>
-                <a href="{% url 'academia_modulo:treino_edit' treino.id %}" class="btn btn-sm btn-primary">Editar</a>
-                
-                <a href="{% url 'academia_modulo:treino_delete' treino.id %}"onclick="return confirm('Deseja realmente excluir o treino {{ treino.nome }}?')" class="btn btn-sm btn-danger">Excluir</a>
-            </td>
-        </tr>
-        {% endfor %}
+            {% for treino in treinos %}
+            <tr>
+                <th scope="row">{{treino.id}}</th>
+                <td>{{treino.aluno.nome}}</td>
+                <td>{{treino.idade}}</td>
+                <td>{{treino.altura}}</td>
+                <td>{{treino.peso}}</td>
+                <td>{{treino.imc}}</td>
+                <td>{{treino.ficha_de_treino.tipo}}</td>
+                <td>
+                    <a href="{% url 'academia_modulo:treino_edit' treino.id %}"
+                        class="btn btn-sm btn-primary">Editar</a>
+
+                    <a href="{% url 'academia_modulo:treino_delete' treino.id %}"
+                        onclick="return confirm('Deseja realmente excluir o treino {{ treino.nome }}?')"
+                        class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+
         </tbody>
+
     </table>
 </div>
 
