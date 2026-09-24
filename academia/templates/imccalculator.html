@@ -1,94 +1,88 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>{% block titulo %}{% endblock %}</title>
-    {% block head %}{% endblock %}
+  {% block head %}{% endblock %}
 </head>
-
 <body>
 
-    <div class="card mt-4" style="max-width: 420px;">
-        <div class="card-header">Calculadora de IMC</div>
-        <div class="card-body">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Altura (m)</span>
-                <input type="text" class="form-control" id="calc-altura" placeholder="Ex: 1.75">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text">Peso (kg)</span>
-                <input type="text" class="form-control" id="calc-peso" placeholder="Ex: 70">
-            </div>
+<div class="card mt-4" style="max-width: 420px;">
+    <div class="card-header">Calculadora de IMC</div>
+    <div class="card-body">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Altura (m)</span>
+            <input type="text" class="form-control" id="calc-altura" placeholder="Ex: 1.75">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Peso (kg)</span>
+            <input type="text" class="form-control" id="calc-peso" placeholder="Ex: 70">
+        </div>
 
-            <button type="button" class="btn btn-primary" id="calc-botao">Calcular</button>
+        <button type="button" class="btn btn-primary" id="calc-botao">Calcular</button>
 
-            <div id="calc-resultado" class="mt-3" style="display: none;">
-                <p class="mb-1">IMC: <strong id="calc-valor"></strong></p>
-                <div id="calc-classificacao" class="alert mb-0 py-2"></div>
-            </div>
+        <div id="calc-resultado" class="mt-3" style="display: none;">
+            <p class="mb-1">IMC: <strong id="calc-valor"></strong></p>
+            <div id="calc-classificacao" class="alert mb-0 py-2"></div>
         </div>
     </div>
+</div>
 
-    <script>
-        (function () {
-            const alturaEl = document.getElementById('calc-altura');
-            const pesoEl = document.getElementById('calc-peso');
-            const botao = document.getElementById('calc-botao');
-            const resultado = document.getElementById('calc-resultado');
-            const valorEl = document.getElementById('calc-valor');
-            const classEl = document.getElementById('calc-classificacao');
+<script>
+    (function () {
+        const alturaEl = document.getElementById('calc-altura');
+        const pesoEl = document.getElementById('calc-peso');
+        const botao = document.getElementById('calc-botao');
+        const resultado = document.getElementById('calc-resultado');
+        const valorEl = document.getElementById('calc-valor');
+        const classEl = document.getElementById('calc-classificacao');
 
-            function classificar(imc) {
-                if (imc < 18.5) return ['Abaixo do peso', 'alert-warning'];
-                if (imc < 25) return ['Peso normal', 'alert-success'];
-                if (imc < 30) return ['Sobrepeso', 'alert-warning'];
-                if (imc < 35) return ['Obesidade grau I', 'alert-danger'];
-                if (imc < 40) return ['Obesidade grau II', 'alert-danger'];
-                return ['Obesidade grau III', 'alert-danger'];
-            }
+        function classificar(imc) {
+            if (imc < 18.5) return ['Abaixo do peso', 'alert-warning'];
+            if (imc < 25)   return ['Peso normal', 'alert-success'];
+            if (imc < 30)   return ['Sobrepeso', 'alert-warning'];
+            if (imc < 35)   return ['Obesidade grau I', 'alert-danger'];
+            if (imc < 40)   return ['Obesidade grau II', 'alert-danger'];
+            return ['Obesidade grau III', 'alert-danger'];
+        }
 
-            function calcular() {
-                let altura = parseFloat(alturaEl.value.replace(',', '.'));
-                const peso = parseFloat(pesoEl.value.replace(',', '.'));
+        function calcular() {
+            let altura = parseFloat(alturaEl.value.replace(',', '.'));
+            const peso = parseFloat(pesoEl.value.replace(',', '.'));
 
-                if (altura > 3) altura = altura / 100; // aceita 175 como 1,75
+            if (altura > 3) altura = altura / 100; // aceita 175 como 1,75
 
-                if (!(altura > 0) || !(peso > 0)) {
-                    resultado.style.display = 'block';
-                    valorEl.textContent = '';
-                    classEl.className = 'alert alert-secondary mb-0 py-2';
-                    classEl.textContent = 'Informe altura e peso válidos.';
-                    return;
-                }
-
-                const imc = peso / (altura * altura);
-                const [texto, classe] = classificar(imc);
-
-                valorEl.textContent = imc.toFixed(2);
-                classEl.className = 'alert ' + classe + ' mb-0 py-2';
-                classEl.textContent = texto;
+            if (!(altura > 0) || !(peso > 0)) {
                 resultado.style.display = 'block';
+                valorEl.textContent = '';
+                classEl.className = 'alert alert-secondary mb-0 py-2';
+                classEl.textContent = 'Informe altura e peso válidos.';
+                return;
             }
 
-            botao.addEventListener('click', calcular);
-            [alturaEl, pesoEl].forEach(function (el) {
-                el.addEventListener('keydown', function (e) {
-                    if (e.key === 'Enter') calcular();
-                });
+            const imc = peso / (altura * altura);
+            const [texto, classe] = classificar(imc);
+
+            valorEl.textContent = imc.toFixed(2);
+            classEl.className = 'alert ' + classe + ' mb-0 py-2';
+            classEl.textContent = texto;
+            resultado.style.display = 'block';
+        }
+
+        botao.addEventListener('click', calcular);
+        [alturaEl, pesoEl].forEach(function (el) {
+            el.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') calcular();
             });
-        })();
-    </script>
+        });
+    })();
+</script>
 
 
-    {% block body %}{% endblock %}
-    {% block footer %}{% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+{% block body %}{% endblock %}
+{% block footer %}{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-
 </html>

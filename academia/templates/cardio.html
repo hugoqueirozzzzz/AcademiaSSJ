@@ -1,69 +1,139 @@
 {% extends "menu.html" %}
 {% load static %}
 
-{% block titulo %}HIPERTROFIA{% endblock %}
+{% block titulo %}Cadastrar Treino{% endblock %}
 
 
 {% block body %}
 
-<div class="container-fluid">
-  <br>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">FICHA DE TREINO: HIPERTROFIA</th>
-    </THEAD>
-  </table>
+<div class="container">
+    <br>
+    <form method="POST" enctype="multipart/form-data" action="{% if treino %}{% url 'academia_modulo:treino_edit' treino.id %}{% else %}{% url 'academia_modulo:cadastrar_treino' %}{% endif %}">
+        
+        {% csrf_token %}    
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonAluno">Aluno</span>
+            <select class="form-select" name="aluno" aria-describedby="basic-addonAluno" required>
+                <option value="">Selecione o aluno</option>
+                {% for aluno in alunos %}
+                    <option value="{{ aluno.id }}" {% if treino and treino.aluno.id == aluno.id %}selected{% endif %}>
+                        {{ aluno.nome }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonIdade">Idade</span>
+            <input type="text" class="form-control" name="idade" placeholder="Digite a idade" aria-label="Idade" aria-describedby="basic-addonIdade" value="{{ treino.idade|default:'' }}">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonAltura">Altura (cm)</span>
+            <input type="text" class="form-control" name="altura" placeholder="Digite a altura em cm. Exemplo 175" aria-label="Altura" aria-describedby="basic-addonAltura" value="{{ treino.altura|default:'' }}">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonPeso">Peso</span>
+            <input type="text" class="form-control" name="peso" placeholder="Digite o peso" aria-label="Peso" aria-describedby="basic-addonPeso" value="{{ treino.peso|default:'' }}">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonIMC">IMC</span>
+            <input type="text" class="form-control" name="imc" placeholder="Digite o IMC" aria-label="IMC" aria-describedby="basic-addonIMC" value="{{ treino.imc|default:'' }}">
+        </div>
+       
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addonFicha">Ficha de Treino</span>
+            <select class="form-select" name="ficha_de_treino" aria-describedby="basic-addonFicha" required>
+                <option value="">Selecione a ficha de treino</option>
+                {% for ficha in fichas %}
+                    <option value="{{ ficha.id }}" {% if treino and treino.ficha_de_treino.id == ficha.id %}selected{% endif %}>
+                        {{ ficha.tipo }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Exercício</th>
-        <th scope="col">Series</th>
-        <th scope="col">Repetições</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Esteira</th>
-        <td>5 minutos</td>
-        <td>Aquecimento</td>
-      </tr>
-      <tr>
-      <tr>
-        <th scope="row">Esteira</th>
-        <td>20 minutos</td>
-        <td>Caminhada Moderada</td>
-      </tr>
-      <tr>
-      <tr>
-        <th scope="row">Esteira</th>
-        <td>10 minutos</td>
-        <td>Ritmo Mais Forte</td>
-      </tr>
-      <tr>
-      <tr>
-        <th scope="row">Esteira</th>
-        <td>5 minutos</td>
-        <td>Desaceleração</td>
-      </tr>
-      <tr>
-      <tr>
-        <th scope="row">Bicicleta</th>
-        <td>15-20 minutos</td>
-        <td></td>
-      </tr>
-      <tr>
-      <tr>
-        <th scope="row">Elíptico</th>
-        <td>10-15 minutos</td>
-        <td></td>
-      </tr>
-      <tr>
-    </tbody>
-  </table>
-
-
+        <div class="input-group mb-3">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
 </div>
+
+    </form>
+<div class="container" align="center">
+  <div class="card text-center" style="max-width: 420px;">
+    <div class="card-header">Calculadora de IMC</div>
+    <div class="card-body">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Altura (m)</span>
+            <input type="text" class="form-control" id="calc-altura" placeholder="Ex: 1.75">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Peso (kg)</span>
+            <input type="text" class="form-control" id="calc-peso" placeholder="Ex: 70">
+        </div>
+
+        <button type="button" class="btn btn-primary" id="calc-botao">Calcular</button>
+
+        <div id="calc-resultado" class="mt-3" style="display: none;">
+            <p class="mb-1">IMC: <strong id="calc-valor"></strong></p>
+            <div id="calc-classificacao" class="alert mb-0 py-2"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const alturaEl = document.getElementById('calc-altura');
+        const pesoEl = document.getElementById('calc-peso');
+        const botao = document.getElementById('calc-botao');
+        const resultado = document.getElementById('calc-resultado');
+        const valorEl = document.getElementById('calc-valor');
+        const classEl = document.getElementById('calc-classificacao');
+
+        function classificar(imc) {
+            if (imc < 18.5) return ['Abaixo do peso', 'alert-warning'];
+            if (imc < 25)   return ['Peso normal', 'alert-success'];
+            if (imc < 30)   return ['Sobrepeso', 'alert-warning'];
+            if (imc < 35)   return ['Obesidade grau I', 'alert-danger'];
+            if (imc < 40)   return ['Obesidade grau II', 'alert-danger'];
+            return ['Obesidade grau III', 'alert-danger'];
+        }
+
+        function calcular() {
+            let altura = parseFloat(alturaEl.value.replace(',', '.'));
+            const peso = parseFloat(pesoEl.value.replace(',', '.'));
+
+            if (altura > 3) altura = altura / 100; // aceita 175 como 1,75
+
+            if (!(altura > 0) || !(peso > 0)) {
+                resultado.style.display = 'block';
+                valorEl.textContent = '';
+                classEl.className = 'alert alert-secondary mb-0 py-2';
+                classEl.textContent = 'Informe altura e peso válidos.';
+                return;
+            }
+
+            const imc = peso / (altura * altura);
+            const [texto, classe] = classificar(imc);
+
+            valorEl.textContent = imc.toFixed(2);
+            classEl.className = 'alert ' + classe + ' mb-0 py-2';
+            classEl.textContent = texto;
+            resultado.style.display = 'block';
+        }
+
+        botao.addEventListener('click', calcular);
+        [alturaEl, pesoEl].forEach(function (el) {
+            el.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') calcular();
+            });
+        });
+    })();
+</script> 
+</div>
+</div>
+
+
+
+   
+
 {% endblock %}

@@ -1,153 +1,131 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <meta charset="UTF-8">
-  <title>{% block title %}Academia Super Saiyajin{% endblock %}</title>
-  {% block head %}{% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Academia Super Saiyajin{% endblock %}</title>
+      {% block head %}{% endblock %}
 
 </head>
 
 <body>
 
-  <!-- Barra de navegação, navbar, ainda tenho que editar os nomes dos elementos -->
+ <!-- Barra de navegação, navbar, ainda tenho que editar os nomes dos elementos -->
   <nav class="navbar sticky-top navbar-light bg-warning navbar-expand-lg">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'academia_modulo:home' %}">Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Alunos
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:cadastrar_aluno' %}">Cadastrar Aluno</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:listar_alunos' %}">Listar Alunos</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Treinos
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:cadastrar_treino' %}">Cadastrar Treino</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:listar_treinos' %}">Listar Treinos</a></li>
-
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Fichas de Treino
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:emagrecimento' %}">Emagrecimento</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:hipertrofia' %}">Hipertrofia</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:condicionamento' %}">Condicionamento</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:forca' %}">Força</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="{% url 'academia_modulo:cardio' %}">Cardio</a></li>
-            </ul>
-          </li>
-
-      </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'academia_modulo:home' %}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Alunos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:cadastrar_aluno' %}">Cadastrar Aluno</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:listar_alunos' %}">Listar Alunos</a></li>
+          </ul>
+        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Treinos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:cadastrar_treino' %}">Cadastrar Treino</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:listar_treinos' %}">Listar Treinos</a></li>
+            
+          </ul>
+        </li>
+                    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Fichas de Treino
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:emagrecimento' %}">Emagrecimento</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:hipertrofia' %}">Hipertrofia</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:condicionamento' %}">Condicionamento</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:forca' %}">Força</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'academia_modulo:cardio' %}">Cardio</a></li>
+          </ul>
+        </li>
+        
     </div>
-  </nav>
-
+  </div>
+</nav>
+    
   <!-- a logo -->
 
-  <div style="text-align: center;">
+    <div style="text-align: center;">
     <a href="{% url 'academia_modulo:home' %}"> <img src="{% static 'img/logo.png' %}" height="150px"> </a>
-  </div>
+    </div>
 
 
-  <br><br>
+<br><br>
 
   <!-- colunas com os cards, falta arrumar o tamanho -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm">
-        <div class="card" style="width: 25rem;">
-          <img src="{% static 'img/homecard1.jpeg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Sonhos desejamos alcançar</h5>
-            <p class="card-text">Ser alguém com um poder maior que você já tem.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm">
-        <div class="card" style="width: 25rem;">
-          <img src="{% static 'img/homecard2.jpeg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">A nossa Luta é pra Valer</h5>
-            <p class="card-text">Mostre o seu valor!</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm">
-        <div class="card" style="width: 25rem;">
-          <img src="{% static 'img/homecard3.jpeg' %}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">E com alegria de viver ninguém vai me deter
-            </h5>
-            <p class="card-text">Meu compromisso é sempre vencer
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="container">
+  <div class="row">
+    <div class="col-sm">
+<div class="card" style="width: 25rem;">
+  <img src="{% static 'img/homecard1.jpeg' %}"  class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Sonhos desejamos alcançar</h5>
+    <p class="card-text">Ser alguém com um poder maior que você já tem.</p>
   </div>
-  <br><br>
+</div>    </div>
+    <div class="col-sm">
+<div class="card" style="width: 25rem;">
+  <img src="{% static 'img/homecard2.jpeg' %}"  class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">A nossa Luta é pra Valer</h5>
+    <p class="card-text">Mostre o seu valor!</p>
+  </div>
+</div>    </div>
+    <div class="col-sm">
+<div class="card" style="width: 25rem;">
+  <img src="{% static 'img/homecard3.jpeg' %}"  class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">E com alegria de viver ninguém vai me deter
+</h5>
+    <p class="card-text">Meu compromisso é sempre vencer
+</p>
+  </div>
+</div>    </div>
+  </div>
+      </div>
+<br><br>
+   
 
-
-  <div class="container-fluid">
+<div class="container-fluid">
     <h1> LIBERE SEU PODER INTERIOR</h1><br><br>
-  </div>
+</div>
 
-  <div class="container-fluid">
-    <div style="text-align: center;">
-      <div style="background-color: rgb(255, 255, 255);">
-
-        <br><br>
-        <p>Desenvolvido por <a href="https://www.instagram.com/nraissamoraes" target="_blank">Moraes</a> e <a
-            href="https://www.instagram.com/hugoqueirozzzz" target="_blank">Queiroz</a></p> <br><br>
-      </div>
-    </div>
-  </div>
+<div class="container-fluid">
+  <div style="text-align: center;">
+    <div style="background-color: rgb(255, 255, 255);">
+      
+ <br><br><p>Desenvolvido por <a href="https://www.instagram.com/nraissamoraes" target="_blank">Moraes</a> e <a href="https://www.instagram.com/hugoqueirozzzz" target="_blank">Queiroz</a></p> <br><br>
+</div>
+</div>
+</div>
 
 
+  
 
 
-
-  {% block body %}{% endblock %}
-  {% block footer %}{% endblock %}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
+{% block body %}{% endblock %}
+{% block footer %}{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
-
 </html>

@@ -9,26 +9,25 @@
 
 <div class="container">
     <br>
-    <form method="POST" enctype="multipart/form-data"
-        action="{% if treino %}{% url 'academia_modulo:treino_edit' treino.id %}{% else %}{% url 'academia_modulo:cadastrar_treino' %}{% endif %}">
-
-        {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data" action="{% if treino %}{% url 'academia_modulo:treino_edit' treino.id %}{% else %}{% url 'academia_modulo:cadastrar_treino' %}{% endif %}">
+        
+        {% csrf_token %}    
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addonAluno">Aluno</span>
             <select class="form-select" name="aluno" aria-describedby="basic-addonAluno" required>
                 <option value="">Selecione o aluno</option>
                 {% for aluno in alunos %}
-                <option value="{{ aluno.id }}" {% if treino and treino.aluno.id==aluno.id %}selected{% endif %}>
-                    {{ aluno.nome }}
-                </option>
+                    <option value="{{ aluno.id }}" {% if treino and treino.aluno.id == aluno.id %}selected{% endif %}>
+                        {{ aluno.nome }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addonIdade">Idade</span>
-            <input type="text" class="form-control" name="idade" placeholder="Digite a idade" aria-label="Idade"
-                aria-describedby="basic-addonIdade" value="{{ treino.idade|default:'' }}">
+            <input type="text" class="form-control" name="idade" placeholder="Digite a idade" aria-label="Idade" aria-describedby="basic-addonIdade" value="{{ treino.idade|default:'' }}">
         </div>
+        
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addonAltura">Altura (cm)</span>
@@ -50,15 +49,15 @@
         </div>
         <div id="imc-classificacao" class="alert py-2 mb-3" style="display: none;"></div>
 
+       
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addonFicha">Ficha de Treino</span>
             <select class="form-select" name="ficha_de_treino" aria-describedby="basic-addonFicha" required>
                 <option value="">Selecione a ficha de treino</option>
                 {% for ficha in fichas %}
-                <option value="{{ ficha.id }}" {% if treino and treino.ficha_de_treino.id==ficha.id %}selected{% endif
-                    %}>
-                    {{ ficha.tipo }}
-                </option>
+                    <option value="{{ ficha.id }}" {% if treino and treino.ficha_de_treino.id == ficha.id %}selected{% endif %}>
+                        {{ ficha.tipo }}
+                    </option>
                 {% endfor %}
             </select>
         </div>
@@ -68,8 +67,7 @@
         </div>
 </div>
 
-</form>
-
+    </form>
 
 <script>
     (function () {
@@ -119,6 +117,6 @@
 
 
 
-
+   
 
 {% endblock %}
