@@ -10,11 +10,11 @@
 
 <div class="container-fluid">
 <br>
-<label for="exampleDataList" class="form-label">Pesquisar Aluno</label>
-<input class="form-control" list="{{aluno.nome}}" id="{{aluno.id}}" placeholder="Escreva o nome do aluno para filtrar dados...">
+<label for="pesquisaAluno" class="form-label">Pesquisar Aluno</label>
+<input class="form-control" id="pesquisaAluno" placeholder="Escreva o nome do aluno para filtrar dados..." onkeyup="filtrarAlunos()">
 
     <br>
-    <table class="table", style="text-align: center;">
+    <table class="table" id="tabelaAlunos" style="text-align: center;">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -47,9 +47,23 @@
             <a href="{% url 'academia_modulo:aluno_delete' aluno.id %}" onclick="return confirm('Tem certeza que deseja excluir este aluno?')" class="btn btn-danger">Excluir</a></td>             
         </tr>
         </tbody>
+
+
         {% endfor %}
     </table>
 </div>
+<script>
+function filtrarAlunos() {
+    const filtro = document.getElementById('pesquisaAluno').value.toLowerCase();
+    const linhas = document.querySelectorAll('#tabelaAlunos tbody tr');
 
+    linhas.forEach(function(linha) {
+        const nomeCelula = linha.cells[1];
+        const nome = nomeCelula.textContent.toLowerCase();
+
+        linha.style.display = nome.includes(filtro) ? '' : 'none';
+    });
+}
+</script>
 
 {% endblock %}

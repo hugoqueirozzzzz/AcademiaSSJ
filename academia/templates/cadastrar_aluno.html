@@ -46,7 +46,7 @@
             </div>
             <div class="col">
                 <div class="input-group mb-3">
-                    <input type="date" class="form-control" name="nascimento" placeholder="Nascimento" aria-label="Nascimento" aria-describedby="basic-addonNascimento" value="{{ aluno.nascimento|default:'' }}">
+                    <input type="date" class="form-control" name="nascimento" placeholder="Nascimento" aria-label="Nascimento" aria-describedby="basic-addonNascimento" value="{{ aluno.nascimento|date:'Y-m-d' }}">
                     <span class="input-group-text" id="basic-addonNascimento">DD/MM/AAAA</span>
                 </div>
             </div>
